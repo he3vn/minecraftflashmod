@@ -25,18 +25,23 @@ public class MinecraftflashmodClient implements ClientModInitializer {
                 shift=true;
             }
 
-            // are others key pressed?
-            boolean otherKey = false;
-            for (int i = 32; i < 349; i++) {
-                if (i != GLFW.GLFW_KEY_LEFT_SHIFT) {
-                    if (InputConstants.isKeyDown(client.getWindow(), i) == true) {
-                        otherKey = true;
-                    }
-                }
+            // is WASD being pressed or nah?
+            boolean moving=false;
+            if (InputConstants.isKeyDown(client.getWindow(), GLFW.GLFW_KEY_W) == true) {
+                moving = true;
+            }
+            if (InputConstants.isKeyDown(client.getWindow(), GLFW.GLFW_KEY_A) == true) {
+                moving = true;
+            }
+            if (InputConstants.isKeyDown(client.getWindow(),GLFW.GLFW_KEY_S)==true) {
+                moving=true;
+            }
+            if (InputConstants.isKeyDown(client.getWindow(),GLFW.GLFW_KEY_D)==true){
+                moving=true;
             }
 
-            // ok this time to sprint u need sprint plus another key im not sure how to do for wasd now but i will try with this
-            if (shift==true && otherKey==true){
+            // ok same code i js changed the variable and now it uses wasd
+            if (shift==true && moving==true){
                 client.player.setSprinting(true);
             }
         });
