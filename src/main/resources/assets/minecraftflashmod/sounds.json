@@ -1,5 +1,5 @@
-{
-    "speedsound": { 
-        "sounds": ["minecraftflashmod:speedmod"]
-    }
-}
+   {
+     "speedsound": {
+       "sounds": ["minecraftflashmod:speedsound"]
+     }
+   }
