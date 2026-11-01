@@ -25,8 +25,18 @@ public class MinecraftflashmodClient implements ClientModInitializer {
                 shift=true;
             }
 
-            // ok now if it knows shift is down, make me sprint
-            if (shift==true) {
+            // are others key pressed?
+            boolean otherKey = false;
+            for (int i = 32; i < 349; i++) {
+                if (i != GLFW.GLFW_KEY_LEFT_SHIFT) {
+                    if (InputConstants.isKeyDown(client.getWindow(), i) == true) {
+                        otherKey = true;
+                    }
+                }
+            }
+
+            // ok this time to sprint u need sprint plus another key im not sure how to do for wasd now but i will try with this
+            if (shift==true && otherKey==true){
                 client.player.setSprinting(true);
             }
         });
