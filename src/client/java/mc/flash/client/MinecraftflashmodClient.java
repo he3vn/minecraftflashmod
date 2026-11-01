@@ -8,6 +8,13 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 
 public class MinecraftflashmodClient implements ClientModInitializer {
+
+    // speed level starts with 1 and goes to 16 so minecraft doesnt break lol
+    int speedLevel=1;
+    
+    // make it true if the up arrow was already down last tick
+    boolean upWasDown= false;
+
     @Override
     public void onInitializeClient() {
 
@@ -40,7 +47,24 @@ public class MinecraftflashmodClient implements ClientModInitializer {
                 moving=true;
             }
 
-            // ok same code i js changed the variable and now it uses wasd
+            // is up arrow pressed?
+            boolean up=false;
+            if (InputConstants.isKeyDown(client.getWindow(), GLFW.GLFW_KEY_UP) == true) {
+                up=true;
+            }
+
+            // shift + up arrow = double the speed level (only once per press)
+            if (shift==true && up==true && upWasDown==false) {
+                if (speedLevel<16){
+                    speedLevel=speedLevel*2;
+                }
+                System.out.println("speed level is now " + speedLevel);
+            }
+            
+            // remember the up arrow for the next tick
+            upWasDown=up;
+
+            //if shift and either WASD make it sprint its like the last one but moving is true too now
             if (shift==true && moving==true){
                 client.player.setSprinting(true);
             }
